@@ -1,0 +1,62 @@
+{% extends 'hotel/base.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<div class="container-fluid">
+    <h2>Room Types</h2>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item" ><a href="{% url 'home' %}" style="color: black;">All</a></li>
+                {% for category in categories %}
+                  <li class="list-group-item"><a href="{% url 'filter' category.id %}" style="color: black;">{{category.name}}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <br>
+        
+        <div class="col-sm-9">
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    
+                    {% for room in rooms  %}
+                             
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    {% if room.image %}
+                                    <img src="{{  room.image.url }}" style="width: 100%; height: 100%;">
+                                    {% else %}
+                                    <img src="https://images.oyoroomscdn.com/uploads/hotel_image/17577/large/128cc8c233313218.jpg" class="img-fluid" alt="Responsive image">                                    
+                                    {% endif %}
+                                </div>
+                                <div class="col-sm-6">
+                                    <h3>{{room.name}}</h3>
+                                    <hr>
+                                    <p>{{room.description}}</p>
+                                    <hr>
+                                    <h6 style="background-color: blanchedalmond;">Price - ₹{{room.price}}/Night</h6>
+                                    <hr>
+                                    <h6>Room Type : {{room.category}}</h6>
+                                    <hr>
+                                    <a href="{% url 'detail' %}"><button type="button" class="btn btn-outline-success">Book Now</button></a>
+                                </div>
+                            </div>
+                        </li>
+                        <br>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
+    
+ 
